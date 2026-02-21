@@ -1,5 +1,5 @@
-{% set version = "4.3.0" %}
-{% set sha256 = "bf0d5fb1f6544153b50111fe644aa1f201e2d8fcf5109f17a9805dc6392974dd" %}
+{% set version = "4.3.1" %}
+{% set sha256 = "84e4653ad290080b816f6488e19431ebf29cdf89d4ec58ded691943e545aa44d" %}
 
 # For dispatching between Unix and Windows
 {% set install_prefix = "." %}  # [unix]
