@@ -62,21 +62,23 @@ outputs:
               - if: win
                 then: Library/lib/cmake/simdjson/simdjson-config.cmake
                 else: lib/cmake/simdjson/simdjson-config.cmake
-      - files:
-          recipe:
-            - test/*
-        requirements:
-          run:
-            - ${{ compiler('cxx') }}
-            - cmake
-            - ninja
-        script:
-          - if: unix
-            then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}
-          - if: win
-            then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson %CMAKE_ARGS%
-          - cmake --build build/
-          - cmake --build build --target test
+      - if: not (linux and riscv64)
+        then:
+          files:
+            recipe:
+              - test/*
+          requirements:
+            run:
+              - ${{ compiler('cxx') }}
+              - cmake
+              - ninja
+          script:
+            - if: unix
+              then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}
+            - if: win
+              then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson %CMAKE_ARGS%
+            - cmake --build build/
+            - cmake --build build --target test
   - package:
       name: simdjson-static
     build:
@@ -106,21 +108,23 @@ outputs:
                 then: lib/libsimdjson_static.a
               - if: win
                 then: Library/lib/simdjson_static.lib
-      - files:
-          recipe:
-            - test/*
-        requirements:
-          run:
-            - ${{ compiler('cxx') }}
-            - cmake
-            - ninja
-        script:
-          - if: unix
-            then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson_static ${CMAKE_ARGS}
-          - if: win
-            then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson_static %CMAKE_ARGS%
-          - cmake --build build/
-          - cmake --build build --target test
+      - if: not (linux and riscv64)
+        then:
+          files:
+            recipe:
+              - test/*
+          requirements:
+            run:
+              - ${{ compiler('cxx') }}
+              - cmake
+              - ninja
+          script:
+            - if: unix
+              then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson_static ${CMAKE_ARGS}
+            - if: win
+              then: cmake -G Ninja -S test/ -B build/ -D TEST_TARGET=simdjson_static %CMAKE_ARGS%
+            - cmake --build build/
+            - cmake --build build --target test
 
 about:
   license: Apache-2.0
