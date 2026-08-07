@@ -20,8 +20,7 @@ outputs:
   - package:
       name: simdjson
     build:
-      script:
-        file: ${{ 'build.sh' if unix else 'build.bat' if win else '' }}
+      script: build
       files:
         - if: win
           then: Library/include/simdjson*
@@ -82,8 +81,7 @@ outputs:
   - package:
       name: simdjson-static
     build:
-      script:
-        file: ${{ 'build.sh' if unix else 'build.bat' if win else '' }}
+      script: build
       files:
         - if: unix
           then: lib/libsimdjson_static.a
