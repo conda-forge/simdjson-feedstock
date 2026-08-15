@@ -2,8 +2,8 @@
 schema_version: 1
 
 context:
-  version: "4.6.6"
-  sha256: 1cd4c4c18263d2ae1f0cd5d4ba8b14e679b5a419ca15988a0da4cf43c514f28d
+  version: "4.6.7"
+  sha256: 3bae37c1b215fc28a32db09a8c25513914cbbc1494d768e593d1b9135c8c0fd4
 
 recipe:
   name: simdjson-split
@@ -14,7 +14,7 @@ source:
   sha256: ${{ sha256 }}
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - package:
@@ -30,18 +30,16 @@ outputs:
         - if: osx
           then: lib/libsimdjson*.dylib*
         - if: win
-          then: Library/bin/simdjson.dll
-        - if: win
-          then: Library/lib/simdjson.lib
-        - if: win
-          then: Library/lib/pkgconfig/simdjson*
-          else: lib/pkgconfig/simdjson*
-        - if: win
-          then: Library/lib/cmake/simdjson/simdjsonTargets*
-          else: lib/cmake/simdjson/simdjsonTargets*
-        - if: win
-          then: Library/lib/cmake/simdjson/simdjson-config*
-          else: lib/cmake/simdjson/simdjson-config*
+          then:
+            - Library/bin/simdjson.dll
+            - Library/lib/simdjson.lib
+            - Library/lib/pkgconfig/simdjson*
+            - Library/lib/cmake/simdjson/simdjsonTargets*
+            - Library/lib/cmake/simdjson/simdjson-config*
+          else:
+            - lib/pkgconfig/simdjson*
+            - lib/cmake/simdjson/simdjsonTargets*
+            - lib/cmake/simdjson/simdjson-config*
     requirements:
       build:
         - ${{ compiler('cxx') }}
@@ -86,9 +84,9 @@ outputs:
         - if: unix
           then: lib/libsimdjson_static.a
         - if: win
-          then: Library/lib/simdjson_static.lib
-        - if: win
-          then: Library/lib/cmake/simdjson/simdjson_staticTargets*
+          then:
+            - Library/lib/simdjson_static.lib
+            - Library/lib/cmake/simdjson/simdjson_staticTargets*
           else: lib/cmake/simdjson/simdjson_staticTargets*
     requirements:
       build:
