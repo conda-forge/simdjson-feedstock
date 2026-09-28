@@ -2,8 +2,8 @@
 schema_version: 1
 
 context:
-  version: "4.6.11"
-  sha256: 61d948fc24f0d793829ad658058e7597d064988a89b4607ea02e401a82df98ff
+  version: "5.0.0"
+  sha256: 72e003bfa39bc6dad1c8d67ec03c656cc250997f63b51369d6e4c4447b52ed20
 
 recipe:
   name: simdjson-split
